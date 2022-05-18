@@ -3,27 +3,29 @@ class Cart extends Component {
   constructor(){
     super()
     this.state = {
-        cart: [], 
-        user: "",
-        total: 0, 
+        cart: [], // untuk menyimpan list cart
+        user: "", // untuk menyimpan data nama user
+        total: 0, // untuk menyimpan data total belanja
     }
   }
   initCart = () => {
     
+    // memanggil data cart pada localStorage
     let tempCart = []
     if(localStorage.getItem("cart") !== null){
         tempCart = JSON.parse(localStorage.getItem("cart"))
     }
-    
+
+     // memanggil data user pada localStorage
     let userName = localStorage.getItem("user")
 
-    // menghitung total harga
+     // kalkulasi total harga
     let totalHarga = 0;
     tempCart.map(item => {
         totalHarga += (item.harga * item.jumlahBeli)
     })
 
-    // memasukkan data cart, user, dan total harga 
+    // memasukkan data cart, user, dan total harga pada state
     this.setState({
         cart: tempCart,
         user: userName,
